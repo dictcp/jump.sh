@@ -16,4 +16,4 @@ _jumpsh()
 }
 complete -F _jumpsh jump.sh
 
-export PATH="$HOME/.jumphost:$PATH"
+export PATH="$HOME/.jumphost/bin:$PATH"
