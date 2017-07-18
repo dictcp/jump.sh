@@ -1,0 +1,24 @@
+#!/bin/bash
+
+AWS_PROFILE="dev" 
+AWS_REGION="ap-southeast-1"
+CACHE_DIR="$HOME/.jumphost/cache"
+OUTPUT_NAME="$AWS_PROFILE.$AWS_REGION"
+
+aws ec2 describe-instances --profile $AWS_PROFILE --region $AWS_REGION > $CACHE_DIR/$OUTPUT_NAME.ec2.json
+
+cat $CACHE_DIR/$OUTPUT_NAME.ec2.json | \
+  jq '.Reservations[].Instances[] | 
+      select(.State.Name == "running") | 
+      { 
+        InstanceId: .InstanceId, 
+        PublicIpAddress: .PublicIpAddress,
+        PrivateIpAddress: .PrivateIpAddress, 
+        Tags: (.Tags|from_entries), 
+        Name: ((.Tags|from_entries|.Name // "i") + (.InstanceId[1:])), 
+        SshUser: (.Tags|from_entries|.SshUser // "ec2-user")
+      }' | 
+      jq -r '.|[.Name, .PublicIpAddress, .User] | @tsv' \
+  > $CACHE_DIR/$OUTPUT_NAME.ec2.findhost.tsv
+
+
