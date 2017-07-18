@@ -3,7 +3,12 @@
 AWS_PROFILE="dev" 
 AWS_REGION="ap-southeast-1"
 CACHE_DIR="$HOME/.jumphost/cache"
+CACHE_TTL=10
 OUTPUT_NAME="$AWS_PROFILE.$AWS_REGION"
+
+if [ $(find $CACHE_DIR -name $OUTPUT_NAME.ec2.json -mmin -$CACHE_TTL | wc -l) -ne 0 ]; then
+  exit 0
+fi
 
 aws ec2 describe-instances --profile $AWS_PROFILE --region $AWS_REGION > $CACHE_DIR/$OUTPUT_NAME.ec2.json
 
