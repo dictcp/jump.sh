@@ -6,7 +6,8 @@ $ jump.sh stg-limestone- # pressing TAB
 stg-limestone-api-0ce455a75    stg-limestone-api-060162c  stg-limestone-worker-0791deb1d  
 ```
 
-# Setup
+## Setup
+
 ```bash
 # please make sure you have awscli and jq installed
 # macOS user can install them via brew install awscli jq
@@ -26,7 +27,8 @@ cp dev.apse1.example dev.apse1.sh
 # ref: https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts
 ```
 
-# Other similar projects
+## Other similar projects
+
 - https://github.com/grahamc/ish
 - https://github.com/achiku/jungle
 - https://github.com/devsisters/eclair
