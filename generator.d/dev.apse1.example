@@ -10,7 +10,7 @@ if [ $(find $CACHE_DIR -name $OUTPUT_NAME.ec2.json -mmin -$CACHE_TTL | wc -l) -n
   exit 0
 fi
 
-aws ec2 describe-instances --profile $AWS_PROFILE --region $AWS_REGION > $CACHE_DIR/$OUTPUT_NAME.ec2.json
+aws ec2 describe-instances --output json --profile $AWS_PROFILE --region $AWS_REGION > $CACHE_DIR/$OUTPUT_NAME.ec2.json
 
 cat $CACHE_DIR/$OUTPUT_NAME.ec2.json | \
   jq '.Reservations[].Instances[] | 
