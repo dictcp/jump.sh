@@ -9,7 +9,7 @@ _jumpsh()
     local cur opts
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
-    names="$(cat ~/.jumphost/cache/*.findhost.tsv | cut -f1)"
+    names="$(~/.jumphost/bin/find-hosts.sh | cut -f1)"
 
     COMPREPLY=( $(compgen -W "${names}" -- ${cur}) )
     return 0
