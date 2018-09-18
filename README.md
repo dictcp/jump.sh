@@ -27,6 +27,11 @@ cp dev.apse1.example dev.apse1.sh
 # ref: https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts
 ```
 
+## Access instances with SSH key
+
+There is no explicit way to config ssh key on specific connection.
+We can use ssh-add to set up connection with SSH automatically.
+
 ## Other similar projects
 
 - https://github.com/grahamc/ish
